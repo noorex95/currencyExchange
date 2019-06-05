@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 class ResultExchange extends Component {
   render() {
-    const result = this.props.exchangeResult * this.props.exchangeRate
-    return(
-      <span><p>Result of Exchange: {result}</p></span>
+    const result = (this.props.exchangeResult * this.props.exchangeRate).toFixed(2)
+    return (
+      <span><p>Result of Exchange: {result} Бел.Руб.</p></span>
     )
   }
 }
