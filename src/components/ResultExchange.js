@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 class ResultExchange extends Component {
+  
   render() {
     const result = (this.props.exchangeInput * this.props.exchangeRate).toFixed(2)
     return (
@@ -10,3 +11,4 @@ class ResultExchange extends Component {
 }
 
 export default ResultExchange;
+

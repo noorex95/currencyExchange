@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import DataEx from './components/DataEx'
 import ResultExchange from './components/ResultExchange'
+import CurrencyRate from './components/CurrencyRate'
 
 class App extends Component {
   
-  state = {
-    exchangeRateBYN: [2.14, 2.41, 2.67, 1], 
+  state = { 
     exchangeRateUSD: [1, 1.14, 1.27, 0.49], 
     exchangeRateEUR: [0.88, 1, 1.12, 0.43], 
     exchangeRateGBP: [0.79, 0.89, 1, 0.39], 
+    exchangeRateBYN: [2.05, 2.34, 2.67, 1], 
     exchangeInput: '', 
-    selectValueFirst: 0, selectValueSecond: 0
-  }
-
-
+    selectValueFirst: '0', selectValueSecond: '0'
+  }//Array in exchangeRate sort by [USD, EUR, GBP, BYN]
+  
+  
 
   handleChangeMoney = (event) => {
     this.setState({exchangeInput: event.target.value})
@@ -72,6 +73,8 @@ class App extends Component {
       <div>
         {menu}
         {this.exchangeCondition()}
+        <br />
+        <CurrencyRate secondValue={this.state.selectValueSecond} />
       </div>
     )
   }
