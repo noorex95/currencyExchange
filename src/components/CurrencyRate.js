@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 
 class CurrencyRate extends Component {
 
+
+
+
+
 	render() {
 
-		const EurInfo = [{currency: 'USD', rate: 1.14}, {currency: 'GBP', rate: 0.89}, {currency: 'BYN', rate: 2.34}]
-		const UsdInfo = [{currency: 'EUR', rate: 0.88}, {currency: 'GBP', rate: 0.79}, {currency: 'BYN', rate: 2.05}]
-		const GbpInfo = [{currency: 'USD', rate: 1.27}, {currency: 'EUR', rate: 1.12}, {currency: 'BYN', rate: 2.67}]
-		const BynInfo = [{currency: 'USD', rate: 0.49}, {currency: 'EUR', rate: 0.43}, {currency: 'GBP', rate: 0.39}]
+		const EurInfo = [{currency: 'USD', rate: 1.14, id: 1}, {currency: 'GBP', rate: 0.89, id: 2}, {currency: 'BYN', rate: 2.34, id: 3}]
+		const UsdInfo = [{currency: 'EUR', rate: 0.88, id: 1}, {currency: 'GBP', rate: 0.79, id: 2}, {currency: 'BYN', rate: 2.05, id: 3}]
+		const GbpInfo = [{currency: 'USD', rate: 1.27, id: 1}, {currency: 'EUR', rate: 1.12, id: 2}, {currency: 'BYN', rate: 2.67, id: 3}]
+		const BynInfo = [{currency: 'USD', rate: 0.49, id: 1}, {currency: 'EUR', rate: 0.43, id: 2}, {currency: 'GBP', rate: 0.39, id: 3}]
 
 		let showTableRate 
 		let currencyName //headline for table
@@ -18,7 +22,7 @@ class CurrencyRate extends Component {
 
 			showTableRate = UsdInfo.map(item => {
 				return (
-					<tr>
+					<tr key={item.id}>
 						<td>{item.currency}</td>
 						<td>{item.rate}</td>
 					</tr>
@@ -66,14 +70,18 @@ class CurrencyRate extends Component {
 		}//condition for show table with currency rate
 
 
+
 		return (
 			<div>
-				<span><p>CurrencyRate: {currencyName}</p></span>
+				<span><p>CurrencyRate</p></span>
+				<span><p>{currencyName}</p></span>
 					<table>
-						{showTableRate}
+						<tbody>
+							{showTableRate}
+						</tbody>
 					</table>
 					<br />
-				<button>Обновить курс</button>
+
 			</div>
 		)
 	}
