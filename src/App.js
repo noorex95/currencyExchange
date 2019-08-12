@@ -5,7 +5,6 @@ import CurrencyRate from './components/CurrencyRate'
 //import GetData from './components/GetData'
 
 class App extends Component {
-  
   state = { 
     exchangeRateUSD: [1, 1.14, 1.27, 0.49], 
     exchangeRateEUR: [0.88, 1, 1.12, 0.43], 
@@ -14,53 +13,39 @@ class App extends Component {
     exchangeInput: '', 
     selectValueFirst: '0', selectValueSecond: '0', status200: '',
   }//Array in exchangeRate sort by [USD, EUR, GBP, BYN]
-  
-  
 
   handleChangeMoney = (event) => {
     this.setState({exchangeInput: event.target.value})
-  }//input with money, who need exchange
-
+  }
   handleChangeFirstSelect = (event) => {
     this.setState({selectValueFirst: event.target.value})
-  }//first select
-  
+  }
   handleChangeSecondSelect = (event) => {
     this.setState({selectValueSecond: event.target.value})
-  }//second select
-  
-
-
+  }
 
   exchangeCondition = () => {
-    if (this.state.selectValueSecond === '0') {
-      return <ResultExchange 
-      exchangeInput={this.state.exchangeInput} 
-      exchangeRate={this.state.exchangeRateUSD[this.state.selectValueFirst]} />
+    switch (this.state.selectValueSecond) {
+        case '0':
+        return <ResultExchange 
+        exchangeInput={this.state.exchangeInput} 
+        exchangeRate={this.state.exchangeRateUSD[this.state.selectValueFirst]} />
+        case '1':
+        return <ResultExchange 
+        exchangeInput={this.state.exchangeInput} 
+        exchangeRate={this.state.exchangeRateEUR[this.state.selectValueFirst]} />
+        case '2':
+        return <ResultExchange 
+        exchangeInput={this.state.exchangeInput} 
+        exchangeRate={this.state.exchangeRateGBP[this.state.selectValueFirst]} />
+        case '3':
+        return <ResultExchange 
+        exchangeInput={this.state.exchangeInput} 
+        exchangeRate={this.state.exchangeRateBYN[this.state.selectValueFirst]} />
+        default:
+        return <p>Result of Exchange:</p>
     }
-    else if (this.state.selectValueSecond === '1') {
-      return <ResultExchange 
-      exchangeInput={this.state.exchangeInput} 
-      exchangeRate={this.state.exchangeRateEUR[this.state.selectValueFirst]} />
-    }
-    else if (this.state.selectValueSecond === '2') {
-      return <ResultExchange 
-      exchangeInput={this.state.exchangeInput} 
-      exchangeRate={this.state.exchangeRateGBP[this.state.selectValueFirst]} />
-    }
-    else if (this.state.selectValueSecond === '3') {
-      return <ResultExchange 
-      exchangeInput={this.state.exchangeInput} 
-      exchangeRate={this.state.exchangeRateBYN[this.state.selectValueFirst]} />
-    }
-    else return <p>Result of Exchange:</p>
-  }//Method with condition for exchange currency
-  
-
-
-
-
-
+  }
 
   clearData = () => {
     this.setState({
@@ -69,13 +54,10 @@ class App extends Component {
       exchangeRateGBP: [], 
       exchangeRateBYN: [],
     })
-  }//When refreshing the data, the old ones are cleared
-
-
+  }
   refreshData = () => {
     const proxyurl = 'https://cors-anywhere.herokuapp.com/'
     const url = 'https://currate.ru/api/?get=rates&pairs=EURUSD,GBPUSD,BYNUSD,USDEUR,GBPEUR,BYNEUR,USDGBP,EURGBP,BYNGBP,USDBYN,EURBYN,GBPBYN&key=8b4b1e10cec2d44ab790b345b3222e04'
-    
     fetch(proxyurl + url) 
       .then (response => response.json())
       .then (result => {
@@ -87,21 +69,15 @@ class App extends Component {
         })
       )})
       .catch (() => console.log ('Can’t access ' + url + ' response. Blocked by browser?'))
-  }//GET data with using fetch API 
-
-
+  }
   resultData = () => {
     this.clearData()
     this.refreshData()
-  }//Result data for refresh currency rate (2 methods are combined)
+  }
 
-
-
-
-
-
-  render() {
-    const menu = <DataEx 
+  menu = () => 
+    (
+      <DataEx 
       exchangeInput={this.state.exchangeInput} 
       handleChangeMoney={(event) => this.handleChangeMoney(event)} 
       selectValueFirst={this.state.selectValueFirst} 
@@ -109,15 +85,28 @@ class App extends Component {
       handleChangeFirstSelect={(event) => this.handleChangeFirstSelect(event)} 
       handleChangeSecondSelect={(event) => this.handleChangeSecondSelect(event)}
       />
-   
+    )
 
+  currencyRate = () =>
+    (
+      <CurrencyRate secondValue={this.state.selectValueSecond} />
+    )
+
+  refreshButton = () =>
+  (
+    <button onClick={() => this.resultData()}>
+      Обновить курс
+    </button>
+  )  
+  
+  render() { 
     return (
       <div>
-        {menu}
+        {this.menu()}
         {this.exchangeCondition()}
-        <br />
-        <CurrencyRate secondValue={this.state.selectValueSecond} />
-        <button onClick={() => this.resultData()}>Обновить курс</button>
+          <br />
+        {this.currencyRate()}
+        {this.refreshButton()}
       </div>
     )
   }

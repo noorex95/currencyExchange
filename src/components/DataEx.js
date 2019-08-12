@@ -1,38 +1,48 @@
 import React, { Component } from 'react';
 
 class DataEx extends Component {
+  state = {
+    currencyItemFirstSelect: [
+      {id: 0, currency: 'USD'}, 
+      {id: 1, currency: 'EUR'}, 
+      {id: 2, currency: 'GBP'}, 
+      {id: 3, currency: 'BYN'}
+    ], 
+    currencyItemSecondSelect: [
+      {id: 0, currency: 'USD'}, 
+      {id: 1, currency: 'EUR'}, 
+      {id: 2, currency: 'GBP'}, 
+      {id: 3, currency: 'BYN'}
+    ]
+  }
 
-  render() {
-    const currencyItemFirstSelect = [{id: 0, currency: 'USD'}, {id: 1, currency: 'EUR'}, {id: 2, currency: 'GBP'}, {id: 3, currency: 'BYN'}]
-    const currencyItemSecondSelect = [{id: 0, currency: 'USD'}, {id: 1, currency: 'EUR'}, {id: 2, currency: 'GBP'}, {id: 3, currency: 'BYN'}]
-    const chooseItemFirstSelect = currencyItemFirstSelect.map(item => {
+  chooseItemFirstSelect = () => 
+    this.state.currencyItemFirstSelect.map(item => {
       return ( 
         <option key={item.id} value={item.id}>
-            {item.currency}
+          {item.currency}
         </option>
       )
     })
-    const chooseItemSecondSelect = currencyItemSecondSelect.map(item => {
+  chooseItemSecondSelect = () => 
+    this.state.currencyItemSecondSelect.map(item => {
       return (
         <option key={item.id + 3} value={item.id}>
-            {item.currency}
+          {item.currency}
         </option>
       )
-    })//output currency for select from the array
+    })
 
-
-
-
-    return (
+  dataResult = () => 
+    (
       <div>
         <p>Currency Exchange</p>
         <form>
           <select value={this.props.selectValueFirst} onChange={this.props.handleChangeFirstSelect}>
-            {chooseItemFirstSelect}
+            {this.chooseItemFirstSelect()}
           </select>
-
           <select value={this.props.selectValueSecond} onChange={this.props.handleChangeSecondSelect}>
-            {chooseItemSecondSelect}
+            {this.chooseItemSecondSelect()}
           </select>
           <input 
             type='number' 
@@ -41,6 +51,13 @@ class DataEx extends Component {
             onChange={this.props.handleChangeMoney}>
           </input>
         </form>
+      </div>
+    )
+
+  render() {
+    return (
+      <div>
+        {this.dataResult()}
       </div>
     )
   }

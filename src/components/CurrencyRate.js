@@ -1,87 +1,138 @@
 import React, { Component } from 'react';
 
 class CurrencyRate extends Component {
+	state = {
+		EurInfo: [
+			{currency: 'USD', rate: 1.14, id: 1}, 
+			{currency: 'GBP', rate: 0.89, id: 2}, 
+			{currency: 'BYN', rate: 2.34, id: 3},
+		],
+		UsdInfo: [
+			{currency: 'EUR', rate: 0.88, id: 1}, 
+			{currency: 'GBP', rate: 0.79, id: 2}, 
+			{currency: 'BYN', rate: 2.05, id: 3},
+		],
+		GbpInfo: [
+			{currency: 'USD', rate: 1.27, id: 1}, 
+			{currency: 'EUR', rate: 1.12, id: 2}, 
+			{currency: 'BYN', rate: 2.67, id: 3},
+		],
+		BynInfo: [
+			{currency: 'USD', rate: 0.49, id: 1}, 
+			{currency: 'EUR', rate: 0.43, id: 2}, 
+			{currency: 'GBP', rate: 0.39, id: 3},
+		]
+	}
 
+	headlineUsd = () => {
+		return <p>Price for 1 USD</p>
+	}
+	headlineEur = () => {
+		return <p>Price for 1 EUR</p>
+	}
+	headlineGbp = () => {
+		return <p>Price for 1 GBP</p>
+	}
+	headlineByn = () => {
+		return <p>Price for 1 BYN</p>
+	}
 
+	tableRateUsd = () => 
+		this.state.UsdInfo.map(item => {
+			return (
+				<div>
+					<table>
+						<tbody>
+							<tr key={item.id}>
+								<td>{item.currency}</td>
+								<td>{item.rate}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			)
+		})
+	tableRateEur = () => 
+		this.state.EurInfo.map(item => {
+			return (
+				<div>
+					<table>
+						<tbody>
+							<tr>
+								<td>{item.currency}</td>
+								<td>{item.rate}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			)
+		})
+	tableRateGbp = () => 
+		this.state.GbpInfo.map(item => {
+			return (
+				<div>
+					<table>
+						<tbody>
+							<tr>
+								<td>{item.currency}</td>
+								<td>{item.rate}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			)
+		})
+	tableRateByn = () => 
+		this.state.BynInfo.map(item => {
+			return (
+				<div>
+					<table>
+						<tbody>
+							<tr>
+								<td>{item.currency} </td>
+								<td>{item.rate}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			)
+		})
 
-
+	headlineTable = () => {
+		switch (this.props.secondValue) {
+			case '0':
+			return this.headlineUsd()
+			case '1':
+			return this.headlineEur()
+			case '2':
+			return this.headlineGbp()
+			case '3':
+			return this.headlineByn()
+			default:
+        	return <p>Sorry, but service not working!</p>
+		}
+	}
+	tableRate = () => {
+		switch (this.props.secondValue) {
+			case '0':
+			return this.tableRateUsd()
+			case '1': 
+			return this.tableRateEur()
+			case '2': 
+			return this.tableRateGbp()
+			case '3': 
+			return this.tableRateByn()
+			default:
+        	return <p>Sorry, but service not working!</p>
+		}
+	}
 
 	render() {
-
-		const EurInfo = [{currency: 'USD', rate: 1.14, id: 1}, {currency: 'GBP', rate: 0.89, id: 2}, {currency: 'BYN', rate: 2.34, id: 3}]
-		const UsdInfo = [{currency: 'EUR', rate: 0.88, id: 1}, {currency: 'GBP', rate: 0.79, id: 2}, {currency: 'BYN', rate: 2.05, id: 3}]
-		const GbpInfo = [{currency: 'USD', rate: 1.27, id: 1}, {currency: 'EUR', rate: 1.12, id: 2}, {currency: 'BYN', rate: 2.67, id: 3}]
-		const BynInfo = [{currency: 'USD', rate: 0.49, id: 1}, {currency: 'EUR', rate: 0.43, id: 2}, {currency: 'GBP', rate: 0.39, id: 3}]
-
-		let showTableRate 
-		let currencyName //headline for table
-
-
-		if (this.props.secondValue === '0') {
-			currencyName = ' Price for 1 USD'
-
-			showTableRate = UsdInfo.map(item => {
-				return (
-					<tr key={item.id}>
-						<td>{item.currency}</td>
-						<td>{item.rate}</td>
-					</tr>
-				)
-			})
-		}
-
-		else if (this.props.secondValue === '1') {
-			currencyName = ' Price for 1 EUR'
-
-			showTableRate = EurInfo.map(item => {
-				return (
-					<tr>
-						<td>{item.currency}</td>
-						<td>{item.rate}</td>
-					</tr>
-				)
-			})
-		}
-
-		else if (this.props.secondValue === '2') {
-			currencyName = ' Price for 1 GBP'
-
-			showTableRate = GbpInfo.map(item => {
-				return (
-					<tr>
-						<td>{item.currency}</td>
-						<td>{item.rate}</td>
-					</tr>
-				)
-			})
-		}
-
-		else if (this.props.secondValue === '3') {
-			currencyName = ' Price for 1 BYN'
-
-			showTableRate = BynInfo.map(item => {
-				return (
-					<tr>
-						<td>{item.currency} </td>
-						<td>{item.rate}</td>
-					</tr>
-				)
-			})
-		}//condition for show table with currency rate
-
-
-
 		return (
 			<div>
 				<span><p>CurrencyRate</p></span>
-				<span><p>{currencyName}</p></span>
-					<table>
-						<tbody>
-							{showTableRate}
-						</tbody>
-					</table>
-					<br />
-
+				{this.headlineTable()}
+				{this.tableRate()}
 			</div>
 		)
 	}
