@@ -27,7 +27,7 @@ class DataEx extends Component {
   chooseItemSecondSelect = () => 
     this.state.currencyItemSecondSelect.map(item => {
       return (
-        <option key={item.id + 3} value={item.id}>
+        <option key={item.id} value={item.id}>
           {item.currency}
         </option>
       )

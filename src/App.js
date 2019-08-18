@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DataEx from './components/DataEx'
 import ResultExchange from './components/ResultExchange'
 import CurrencyRate from './components/CurrencyRate'
-//import GetData from './components/GetData'
+import GetData from './components/GetData'
 
 class App extends Component {
   state = { 
@@ -11,7 +11,7 @@ class App extends Component {
     exchangeRateGBP: [0.79, 0.89, 1, 0.39], 
     exchangeRateBYN: [2.05, 2.34, 2.67, 1], 
     exchangeInput: '', 
-    selectValueFirst: '0', selectValueSecond: '0', status200: '',
+    selectValueFirst: '0', selectValueSecond: '0', 
   }//Array in exchangeRate sort by [USD, EUR, GBP, BYN]
 
   handleChangeMoney = (event) => {
@@ -55,26 +55,34 @@ class App extends Component {
       exchangeRateBYN: [],
     })
   }
-  refreshData = () => {
-    const proxyurl = 'https://cors-anywhere.herokuapp.com/'
-    const url = 'https://currate.ru/api/?get=rates&pairs=EURUSD,GBPUSD,BYNUSD,USDEUR,GBPEUR,BYNEUR,USDGBP,EURGBP,BYNGBP,USDBYN,EURBYN,GBPBYN&key=8b4b1e10cec2d44ab790b345b3222e04'
-    fetch(proxyurl + url) 
-      .then (response => response.json())
-      .then (result => {
+  // refreshData = () => {
+  //   const proxyurl = 'https://cors-anywhere.herokuapp.com/'
+  //   const url = 'https://currate.ru/api/?get=rates&pairs=EURUSD,GBPUSD,BYNUSD,USDEUR,GBPEUR,BYNEUR,USDGBP,EURGBP,BYNGBP,USDBYN,EURBYN,GBPBYN&key=8b4b1e10cec2d44ab790b345b3222e04'
+  //   fetch(proxyurl + url) 
+  //     .then (response => response.json())
+  //     .then (result => {
+  //       this.setState(prevState => ({
+  //         exchangeRateUSD: [...prevState.exchangeRateUSD, 1, result.data.EURUSD, result.data.GBPUSD, result.data.BYNUSD],
+  //         exchangeRateEUR: [...prevState.exchangeRateEUR, result.data.USDEUR, 1, result.data.GBPEUR, result.data.BYNEUR],
+  //         exchangeRateGBP: [...prevState.exchangeRateGBP, result.data.USDGBP, result.data.EURGBP, 1, 0.39],
+  //         exchangeRateBYN: [...prevState.exchangeRateBYN, result.data.USDBYN, result.data.EURBYN, 2.67, 1],
+  //       })
+  //     )})
+  //     .catch (() => console.log ('Can’t access ' + url + ' response. Blocked by browser?'))
+  // }
+  // resultData = () => {
+  //   this.clearData()
+  //   this.refreshData()
+  // }
+tryMe = (result) => {
         this.setState(prevState => ({
           exchangeRateUSD: [...prevState.exchangeRateUSD, 1, result.data.EURUSD, result.data.GBPUSD, result.data.BYNUSD],
           exchangeRateEUR: [...prevState.exchangeRateEUR, result.data.USDEUR, 1, result.data.GBPEUR, result.data.BYNEUR],
           exchangeRateGBP: [...prevState.exchangeRateGBP, result.data.USDGBP, result.data.EURGBP, 1, 0.39],
           exchangeRateBYN: [...prevState.exchangeRateBYN, result.data.USDBYN, result.data.EURBYN, 2.67, 1],
         })
-      )})
-      .catch (() => console.log ('Can’t access ' + url + ' response. Blocked by browser?'))
-  }
-  resultData = () => {
-    this.clearData()
-    this.refreshData()
-  }
-
+      )
+    }
   menu = () => 
     (
       <DataEx 
@@ -91,13 +99,16 @@ class App extends Component {
     (
       <CurrencyRate secondValue={this.state.selectValueSecond} />
     )
-
-  refreshButton = () =>
-  (
-    <button onClick={() => this.resultData()}>
-      Обновить курс
-    </button>
-  )  
+  // refreshButton = () =>
+  //   (
+  //     <button onClick={() => this.resultData()}>
+  //       Обновить курс
+  //     </button>
+  //   )  
+  tryAll = () => 
+    (
+      <GetData tryMe={this.tryMe()} clearData={this.clearData()} />
+    )
   
   render() { 
     return (
@@ -106,7 +117,7 @@ class App extends Component {
         {this.exchangeCondition()}
           <br />
         {this.currencyRate()}
-        {this.refreshButton()}
+        {this.tryAll()}
       </div>
     )
   }
