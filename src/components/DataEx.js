@@ -3,37 +3,37 @@ import React, { Component } from 'react';
 class DataEx extends Component {
   state = {
     currencyItemFirstSelect: [
-      {id: 0, currency: 'USD'}, 
-      {id: 1, currency: 'EUR'}, 
-      {id: 2, currency: 'GBP'}, 
+      {id: 0, currency: 'USD'},
+      {id: 1, currency: 'EUR'},
+      {id: 2, currency: 'GBP'},
       {id: 3, currency: 'BYN'}
-    ], 
+    ],
     currencyItemSecondSelect: [
-      {id: 0, currency: 'USD'}, 
-      {id: 1, currency: 'EUR'}, 
-      {id: 2, currency: 'GBP'}, 
+      {id: 0, currency: 'USD'},
+      {id: 1, currency: 'EUR'},
+      {id: 2, currency: 'GBP'},
       {id: 3, currency: 'BYN'}
     ]
   }
 
-  chooseItemFirstSelect = () => 
-    this.state.currencyItemFirstSelect.map(item => {
-      return ( 
+  chooseItemFirstSelect = () =>
+    this.state.currencyItemFirstSelect.map(item =>
+      (
         <option key={item.id} value={item.id}>
           {item.currency}
         </option>
       )
-    })
-  chooseItemSecondSelect = () => 
-    this.state.currencyItemSecondSelect.map(item => {
-      return (
+    )
+  chooseItemSecondSelect = () =>
+    this.state.currencyItemSecondSelect.map(item =>
+      (
         <option key={item.id} value={item.id}>
           {item.currency}
         </option>
       )
-    })
+    )
 
-  dataResult = () => 
+  dataResult = () =>
     (
       <div>
         <p>Currency Exchange</p>
@@ -44,23 +44,22 @@ class DataEx extends Component {
           <select value={this.props.selectValueSecond} onChange={this.props.handleChangeSecondSelect}>
             {this.chooseItemSecondSelect()}
           </select>
-          <input 
-            type='number' 
-            placeholder='Введите сумму' 
-            value={this.props.exchangeInput} 
+          <input
+            type='number'
+            placeholder='Введите сумму'
+            value={this.props.exchangeInput}
             onChange={this.props.handleChangeMoney}>
           </input>
         </form>
       </div>
     )
 
-  render() {
-    return (
+  render = () =>
+    (
       <div>
         {this.dataResult()}
       </div>
     )
-  }
 }
 
 export default DataEx;
