@@ -57,10 +57,10 @@ class App extends Component {
   }
   refreshState = (result) => {
         this.setState(prevState => ({
-          exchangeRateUSD: [...prevState.exchangeRateUSD, 1, result.data.EURUSD, result.data.GBPUSD, result.data.BYNUSD],
-          exchangeRateEUR: [...prevState.exchangeRateEUR, result.data.USDEUR, 1, result.data.GBPEUR, result.data.BYNEUR],
-          exchangeRateGBP: [...prevState.exchangeRateGBP, result.data.USDGBP, result.data.EURGBP, 1, result.data.BYNGBP],
-          exchangeRateBYN: [...prevState.exchangeRateBYN, result.data.USDBYN, result.data.EURBYN, result.data.GBPBYN, 1],
+          exchangeRateUSD: [...prevState.exchangeRateUSD, 1, +result.data.EURUSD, +result.data.GBPUSD, +result.data.BYNUSD],
+          exchangeRateEUR: [...prevState.exchangeRateEUR, +result.data.USDEUR, 1, +result.data.GBPEUR, +result.data.BYNEUR],
+          exchangeRateGBP: [...prevState.exchangeRateGBP, +result.data.USDGBP, +result.data.EURGBP, 1, +result.data.BYNGBP],
+          exchangeRateBYN: [...prevState.exchangeRateBYN, +result.data.USDBYN, +result.data.EURBYN, +result.data.GBPBYN, 1],
         })
       )
     }
@@ -92,6 +92,7 @@ class App extends Component {
       BYNUSD={this.state.exchangeRateUSD[3]}
       BYNEUR={this.state.exchangeRateEUR[3]}
       BYNGBP={this.state.exchangeRateGBP[3]}
+      allData={this.state.exchangeRateUSD}
       />
     )
   clickToRefresh = () =>

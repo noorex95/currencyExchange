@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 
 class GetData extends Component {
 
@@ -9,7 +10,7 @@ class GetData extends Component {
       method: 'POST',
       body: JSON.stringify({
       username: 'noorex',
-      email: 'noorex87@mail.ru',
+      email: 'noorex87@gmail.com',
       userId: 1
     }),
     headers: {"Content-Type": "application/json; charset=utf-8"}
@@ -29,6 +30,11 @@ class GetData extends Component {
 			<button onClick={() => this.resultData()}>Обновить курс</button>
 		</div>
 	)
+}
+
+GetData.propTypes = {
+  refreshState: PropTypes.func,
+  clearData: PropTypes.func
 }
 
 export default GetData;

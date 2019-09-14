@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 
 class ResultExchange extends Component {
-  
-  result = () => 
+
+  result = () =>
   (this.props.exchangeInput * this.props.exchangeRate).toFixed(2)
-  
-  render = () => 
+
+  render = () =>
    (
       <span><p>Result of Exchange: {this.result()}</p></span>
    )
 }
 
-export default ResultExchange;
+ResultExchange.propTypes = {
+	exchangeInput: PropTypes.string,
+	exchangeRate: PropTypes.number
+}
 
+
+export default ResultExchange;

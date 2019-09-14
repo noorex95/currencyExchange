@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 
 class CurrencyRate extends Component {
 	state = {
@@ -130,7 +131,27 @@ class CurrencyRate extends Component {
         	return <p>Sorry, but service not working!</p>
 		}
 	}
-
+componentWillReceiveProps = (props) => {
+		this.setState(prevState => {
+			const dataUsd = [...prevState.UsdInfo]
+			const dataEur = [...prevState.EurInfo]
+			const dataGbp = [...prevState.GbpInfo]
+			const dataByn = [...prevState.BynInfo]
+			dataUsd[0].rate = props.USDEUR
+			dataUsd[1].rate = props.USDGBP
+			dataUsd[2].rate = props.USDBYN
+			dataEur[0].rate = props.EURUSD
+			dataEur[1].rate = props.EURGBP
+			dataEur[2].rate = props.EURBYN
+			dataGbp[0].rate = props.GBPUSD
+			dataGbp[1].rate = props.GBPEUR
+			dataGbp[2].rate = props.GBPBYN
+			dataByn[0].rate = props.BYNUSD
+			dataByn[1].rate = props.BYNEUR
+			dataByn[2].rate = props.BYNGBP
+			return ({UsdInfo: dataUsd, EurInfo: dataEur, GbpInfo: dataGbp, BynInfo: dataByn})
+	})
+}
 	render = () =>
 		(
 			<div>
@@ -141,5 +162,20 @@ class CurrencyRate extends Component {
 		)
 }
 
+CurrencyRate.propTypes = {
+	firstValue: PropTypes.string,
+	USDEUR: PropTypes.number,
+	USDGBP: PropTypes.number,
+	USDBYN: PropTypes.number,
+	EURUSD: PropTypes.number,
+	EURGBP: PropTypes.number,
+	EURBYN: PropTypes.number,
+	GBPUSD: PropTypes.number,
+	GBPEUR: PropTypes.number,
+	GBPBYN: PropTypes.number,
+	BYNUSD: PropTypes.number,
+	BYNEUR: PropTypes.number,
+	BYNGBP: PropTypes.number
+}
 
 export default CurrencyRate;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 
 class DataEx extends Component {
   state = {
@@ -60,6 +61,15 @@ class DataEx extends Component {
         {this.dataResult()}
       </div>
     )
+}
+
+DataEx.propTypes = {
+  selectValueFirst: PropTypes.string,
+  handleChangeFirstSelect: PropTypes.func,
+  selectValueSecond: PropTypes.string,
+  handleChangeSecondSelect: PropTypes.func,
+  exchangeInput: PropTypes.string,
+  handleChangeMoney: PropTypes.func
 }
 
 export default DataEx;
