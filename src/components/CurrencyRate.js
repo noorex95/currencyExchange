@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
+import './css/CurrencyRate.css'
 
 class CurrencyRate extends Component {
 	state = {
@@ -49,8 +50,8 @@ class CurrencyRate extends Component {
 					<table>
 						<tbody>
 							<tr key={item.id}>
+								<td>{parseFloat(item.rate).toFixed(2)}</td>
 								<td>{item.currency}</td>
-								<td>{item.rate}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -64,8 +65,8 @@ class CurrencyRate extends Component {
 					<table>
 						<tbody>
 							<tr>
+								<td>{parseFloat(item.rate).toFixed(2)}</td>
 								<td>{item.currency}</td>
-								<td>{item.rate}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -79,8 +80,8 @@ class CurrencyRate extends Component {
 					<table>
 						<tbody>
 							<tr>
+								<td>{parseFloat(item.rate).toFixed(2)}</td>
 								<td>{item.currency}</td>
-								<td>{item.rate}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -94,8 +95,8 @@ class CurrencyRate extends Component {
 					<table>
 						<tbody>
 							<tr>
-								<td>{item.currency} </td>
-								<td>{item.rate}</td>
+								<td>{parseFloat(item.rate).toFixed(2)}</td>
+								<td>{item.currency}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -154,16 +155,18 @@ componentWillReceiveProps = (props) => {
 }
 	render = () =>
 		(
-			<div>
-				<span><p>CurrencyRate</p></span>
-				{this.headlineTable()}
-				{this.tableRate()}
+			<div className='rate-table'>
+				<span><p className='title-table'>Currency Rate</p></span>
+					<div className='border-for-table'>
+						{this.headlineTable()}
+						{this.tableRate()}
+					</div>
 			</div>
 		)
 }
 
 CurrencyRate.propTypes = {
-	firstValue: PropTypes.string,
+	firstValue: PropTypes.string.isRequired,
 	USDEUR: PropTypes.number,
 	USDGBP: PropTypes.number,
 	USDBYN: PropTypes.number,

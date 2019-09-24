@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
+import './css/DataEx.css'
 
 class DataEx extends Component {
   state = {
@@ -36,21 +37,26 @@ class DataEx extends Component {
 
   dataResult = () =>
     (
-      <div>
-        <p>Currency Exchange</p>
-        <form>
-          <select value={this.props.selectValueFirst} onChange={this.props.handleChangeFirstSelect}>
-            {this.chooseItemFirstSelect()}
-          </select>
-          <select value={this.props.selectValueSecond} onChange={this.props.handleChangeSecondSelect}>
-            {this.chooseItemSecondSelect()}
-          </select>
-          <input
-            type='number'
-            placeholder='Введите сумму'
-            value={this.props.exchangeInput}
-            onChange={this.props.handleChangeMoney}>
-          </input>
+      <div className='content'>
+        <div className='header'><h1>Currency Exchange</h1></div>
+          <form>
+            <div className='select__wrapper'>
+              <select className='header__select' value={this.props.selectValueFirst} onChange={this.props.handleChangeFirstSelect}>
+                {this.chooseItemFirstSelect()}
+              </select>
+              <select className='header__select' value={this.props.selectValueSecond} onChange={this.props.handleChangeSecondSelect}>
+                {this.chooseItemSecondSelect()}
+              </select>
+            </div>
+            <div className='input__wrapper'>
+              <input
+                className='header__input'
+                type='number'
+                placeholder='Введите сумму'
+                value={this.props.exchangeInput}
+                onChange={this.props.handleChangeMoney}>
+              </input>
+            </div>
         </form>
       </div>
     )
@@ -64,10 +70,10 @@ class DataEx extends Component {
 }
 
 DataEx.propTypes = {
-  selectValueFirst: PropTypes.string,
-  handleChangeFirstSelect: PropTypes.func,
-  selectValueSecond: PropTypes.string,
-  handleChangeSecondSelect: PropTypes.func,
+  selectValueFirst: PropTypes.string.isRequired,
+  handleChangeFirstSelect: PropTypes.func.isRequired,
+  selectValueSecond: PropTypes.string.isRequired,
+  handleChangeSecondSelect: PropTypes.func.isRequired,
   exchangeInput: PropTypes.string,
   handleChangeMoney: PropTypes.func
 }

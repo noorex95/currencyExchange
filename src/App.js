@@ -3,6 +3,7 @@ import DataEx from './components/DataEx'
 import ResultExchange from './components/ResultExchange'
 import CurrencyRate from './components/CurrencyRate'
 import GetData from './components/GetData'
+import './components/css/App.css'
 
 class App extends Component {
   state = {
@@ -102,12 +103,14 @@ class App extends Component {
 
   render = () =>
     (
-      <div>
+      <div className='container'>
         {this.menu()}
         {this.exchangeCondition()}
           <br />
-        {this.currencyRate()}
-        {this.clickToRefresh()}
+        <div className='table'>
+          {this.currencyRate()}
+          {this.clickToRefresh()}
+        </div>
       </div>
     )
 }

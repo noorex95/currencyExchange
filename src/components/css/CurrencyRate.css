@@ -1,0 +1,18 @@
+.rate-table {
+  float:left;
+  margin-left: 30px;
+  padding: 20px;
+  font-size: 20px;
+  border: 1px solid grey;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 200px;
+}
+.title-table {
+  padding-bottom: 25px;
+  font-size: 24px;
+}
+.border-for-table {
+  border: 1px solid grey;
+  border-radius: 10px;
+}

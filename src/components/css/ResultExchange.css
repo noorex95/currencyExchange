@@ -1,0 +1,14 @@
+.result-exchange {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 25px;
+  line-height: 60px;
+	color: #000000;
+	font-weight: 550;
+}
+
+@media screen and (max-width: 470px) {
+  .result-exchange {
+    font-size: 20px;
+  }
+}

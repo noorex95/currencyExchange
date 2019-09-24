@@ -1,0 +1,12 @@
+.container {
+  max-width: 100%;
+  min-width: 300px;
+  background:linear-gradient(135deg, rgb(73, 221, 216) 0%, rgb(25, 226, 115) 100%);
+  position: relative;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.table {
+  display: inline;
+}
